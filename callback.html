@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация успешна | TikTok Video Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #69C9D0 0%, #EE1D52 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.9;
+            text-decoration: underline;
+        }
+        
+        /* Main Content */
+        .auth-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+        
+        .auth-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #4CAF50;
+            margin-bottom: 30px;
+            animation: bounce 1s;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .auth-card h1 {
+            font-size: 36px;
+            color: #222;
+            margin-bottom: 20px;
+        }
+        
+        .auth-card p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .highlight {
+            color: #EE1D52;
+            font-weight: 700;
+        }
+        
+        .status-box {
+            background-color: #f1f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #69C9D0;
+            text-align: left;
+        }
+        
+        .status-box h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-box h3 i {
+            margin-right: 10px;
+            color: #69C9D0;
+        }
+        
+        .status-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .status-box li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .next-steps {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .next-steps h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .next-steps h3 i {
+            margin-right: 10px;
+            color: #EE1D52;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            min-width: 180px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #69C9D0, #EE1D52);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #333;
+            border: 2px solid #69C9D0;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f1f8ff;
+            transform: translateY(-3px);
+        }
+        
+        .btn i {
+            margin-right: 10px;
+        }
+        
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #e9ecef;
+            border-radius: 2px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #69C9D0, #EE1D52);
+            animation: loading 2s ease-in-out;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        .auto-close {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #69C9D0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #69C9D0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-card h1 {
+                font-size: 28px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-video"></i>
+                    <span>TikTok Video Editor</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="privacy-policy.html">Политика конфиденциальности</a></li>
+                        <li><a href="terms-of-service.html">Условия использования</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="auth-content">
+        <div class="container">
+            <div class="auth-card">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <h1>Авторизация успешна! 🎉</h1>
+                <p>Вы успешно предоставили доступ к вашему <span class="highlight">TikTok аккаунту</span> для приложения TikTok Video Editor.</p>
+                
+                <div class="status-box">
+                    <h3><i class="fas fa-check"></i> Что было получено:</h3>
+                    <ul>
+                        <li><strong>Код авторизации</strong> - для получения access token</li>
+                        <li><strong>Базовые права доступа</strong> - для работы с вашим контентом</li>
+                        <li><strong>Идентификатор пользователя</strong> - для безопасного хранения данных</li>
+                    </ul>
+                </div>
+                
+                <div class="next-steps">
+                    <h3><i class="fas fa-forward"></i> Дальнейшие шаги:</h3>
+                    <p>Теперь вы можете вернуться в приложение и начать использовать все возможности TikTok Video Editor:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Создание и редактирование видео</li>
+                        <li>Публикация контента в TikTok</li>
+                        <li>Анализ статистики публикаций</li>
+                        <li>Управление несколькими аккаунтами</li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-home"></i> На главную
+                    </a>
+                    <button onclick="closeWindow()" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Закрыть окно
+                    </button>
+                </div>
+                
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                
+                <p class="auto-close">Это окно закроется автоматически через 5 секунд...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TikTok Video Editor</h3>
+                    <p>Умные инструменты для создания и редактирования контента для TikTok. Безопасность и удобство — наш приоритет.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="privacy-policy.html">Политика конфиденциальности</a></li>
+                        <li><a href="terms-of-service.html">Условия использования</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@tiktokeditorapp.com</li>
+                        <li><i class="fas fa-globe"></i> tiktokeditorapp.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TikTok Video Editor. Все права защищены.</p>
+                <p>Этот сайт и приложение не являются частью TikTok. TikTok является товарным знаком ByteDance.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Автозакрытие окна через 5 секунд
+        setTimeout(() => {
+            try {
+                // Пробуем закрыть окно если оно было открыто через popup
+                if (window.opener) {
+                    window.close();
+                } else {
+                    // Если не popup, просто перенаправляем на главную
+                    window.location.href = "index.html";
+                }
+            } catch (e) {
+                // В случае ошибки просто перенаправляем
+                window.location.href = "index.html";
+            }
+        }, 5000);
+        
+        // Функция для ручного закрытия окна
+        function closeWindow() {
+            try {
+                window.close();
+            } catch (e) {
+                window.location.href = "index.html";
+            }
+        }
+        
+        // Функция для парсинга параметров из URL (если нужно показать какие-то данные)
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const paramsObj = {};
+            
+            for (const [key, value] of params) {
+                paramsObj[key] = value;
+            }
+            
+            return paramsObj;
+        }
+        
+        // При загрузке страницы можно проверить есть ли параметры от TikTok
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = getUrlParams();
+            
+            // Если есть параметр error (например, пользователь отменил авторизацию)
+            if (params.error) {
+                document.querySelector('.success-icon').innerHTML = '<i class="fas fa-times-circle" style="color: #f44336;"></i>';
+                document.querySelector('.success-icon').style.color = '#f44336';
+                document.querySelector('h1').textContent = 'Авторизация не удалась';
+                document.querySelector('.status-box h3').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Что произошло:';
+                document.querySelector('.status-box ul').innerHTML = `<li>Ошибка: ${params.error}</li>`;
+                document.querySelector('.auto-close').textContent = 'Возврат на главную через 5 секунд...';
+            }
+            
+            // Можно также отобразить полученный код (в реальном приложении этого делать не нужно!)
+            if (params.code && params.state) {
+                console.log('Auth code received:', params.code);
+                console.log('State:', params.state);
+            }
+        });
+    </script>
+</body>
+</html>
